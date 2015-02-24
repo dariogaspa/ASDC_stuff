@@ -31,7 +31,7 @@ int main(int argc, char *argv[]) {
   double conv[40000];
   double ums[40000];
   double nufnu[40000];
-  int nbins=395;
+  int nbins=395; //change according to the number of point in the LC file
   // cin>>nbins;
 
   fp = fopen(argv[1], "r");
@@ -59,7 +59,7 @@ int main(int argc, char *argv[]) {
  
  aaa=0;
  //b=1.e-18;
- ee=1000;
+ ee=1000; //everthing is converted to 1 GeV
  freq=2.42e22*ee/100;
  emax=100000;
  emin=100;
