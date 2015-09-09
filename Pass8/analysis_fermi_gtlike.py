@@ -7,7 +7,7 @@ import pyLikelihood
 from UnbinnedAnalysis import *
 from UnbinnedAnalysis import *
 from UpperLimits import UpperLimits
-import xml_creator_P7_v1
+import xml_creator_P8_v1
 #from likeSED import *
 import fileinput
 import pyfits
@@ -79,7 +79,7 @@ def search(stringsearch,filename):
         lineae=fileinput.filelineno()
         return lineae
 
-kVersion=('\nThis script is simply a wrap-up of commands for Fermi Analyis, version P8 0.1 \n'
+kVersion=('\nThis script is simply a wrap-up of commands for Fermi Analyis, version P8 1.0 \n'
           'For info, comments or suggestions: gasparrini@asdc.asi.it and cutini@asdc.asi.it \n')
     
 kSynopsis=('\nSYNOPSIS: analysis_fermi.py Source_Name Ra Dec Tmin Tmax EMin Emax SC_file ROI\n'
