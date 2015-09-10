@@ -10,10 +10,10 @@ import math
 from numpy import *
 import numpy as np
 
+
 def main(path,NAME,RA,DEC,EMIN,EMAX,ROI,Np):
-    #bkghome="/usr/local/soft/web/apache-tomcat-6.0.35/apps/fermi/bkg"
-    bkghome="/usr/local/soft/web/apache-tomcat-7.0.34/apps/fermi/bkg"
-    #bkghome="/home/fermi/prove/bkg/"
+    #bkghome="/usr/local/soft/web/apache-tomcat-7.0.34/apps/fermi/bkg"
+    bkghome="$(FERMI_DIR)/refdata/fermi/galdiffuse/"
     fgl = "%s/gll_psc_v16.fit" %(bkghome)
     dreq =  3.141592653589793/180.0
     dreq1 = 1./(3.1415922653589793/180.0)
@@ -269,7 +269,7 @@ def main(path,NAME,RA,DEC,EMIN,EMAX,ROI,Np):
 if __name__ == "__main__":
     argc = len(sys.argv)    
     if argc !=8:
-        print "python xml editor  using 1FGL catalog"
+        print "python xml editor  using 3FGL catalog"
         print "insert path NAME_SOURCE RA DEC EMIN EMAX ROI Np"
         print "troubles contact: sara.cutini@asdc.asi.it"
     if argc==7:
