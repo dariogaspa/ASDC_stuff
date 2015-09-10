@@ -97,6 +97,7 @@ def main(NAME,RA,DEC,TSTART,TSTOP,EMIN,EMAX,Np, path, ROIu):
     os.system("ls -1 '"+Npp+"'_PH*.fits > %s/%s_events.list" %(path,Np))
  
    # os.system('ls -1 'Np'+'PH*.fits > %s/%s_events.list' %(path,Np)
+#GTSELECT
     my_apps.filter['evclass'] = 128
     my_apps.filter['evtype'] = 3
 #    my_apps.filter['evclsmin'] = 3
@@ -112,7 +113,7 @@ def main(NAME,RA,DEC,TSTART,TSTOP,EMIN,EMAX,Np, path, ROIu):
     my_apps.filter['infile'] = '@%s/%s_events.list' %(path,Np)
     my_apps.filter['outfile'] = '%s/%s_filtered.fits'%(path,Np)
     my_apps.filter.run()
-#    maketime
+#GTMKTIME
     my_apps.maketime['scfile'] = SC
     my_apps.maketime['filter'] = '(DATA_QUAL>0)&&(LAT_CONFIG==1)'
     my_apps.maketime['roicut'] = 'no'
@@ -147,7 +148,7 @@ def main(NAME,RA,DEC,TSTART,TSTOP,EMIN,EMAX,Np, path, ROIu):
 
     #sara xml model
     roiname='%s/%s_filtered_gti.fits' %(path,Np)
-    xml_creator_P7_v1.main(path,NAME,float(RA),float(DEC),float(EMIN), float(EMAX), 20,Np)
+    xml_creator_P8_v1.main(path,NAME,float(RA),float(DEC),float(EMIN), float(EMAX), 20,Np)
     xmlmodelname='%s/%s_model.xml' %(path,Np)
     
     my_apps.diffResps['evfile'] = '%s/%s_filtered_gti.fits'%(path,Np)
