@@ -163,7 +163,16 @@ def main(NAME,RA,DEC,TSTART,TSTOP,EMIN,EMAX,Np, path, ROIu):
     expCubeFile='%s/%s_expCube.fits'  %(path,Np)
     obs = UnbinnedObs(roiname,SC ,expMap=expMapFile,expCube=expCubeFile,irfs='CALDB')
     like1 = UnbinnedAnalysis(obs,xmlmodelname,optimizer='NewMinuit')
-    like1.fit(verbosity=0)
+    like1.fit(verbosity=0,optObject=likeobj)
+    print likeobj.getRetCode()
+    sourceDetails = {}
+    for source in like1.sourceNames():
+		sourceDetails[source] = like1.Ts(source)
+	for source,TS in sourceDetails.iteritems():
+		if (TS < 2):
+	      print "Deleting...", source, " TS = ", TS
+	      like1.deleteSource(source)	
+	like1.fit(verbosity=0,optObject=likeobj)
     like1.logLike.writeXml(xmlfitname)
 
     
