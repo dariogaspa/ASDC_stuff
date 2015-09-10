@@ -5,7 +5,7 @@ import pyfits
 from numpy import * 
 import sys
 from math import *
-#import numarray
+# import numarray
 import math
 from numpy import *
 import numpy as np
@@ -14,25 +14,25 @@ def main(path,NAME,RA,DEC,EMIN,EMAX,ROI,Np):
     #bkghome="/usr/local/soft/web/apache-tomcat-6.0.35/apps/fermi/bkg"
     bkghome="/usr/local/soft/web/apache-tomcat-7.0.34/apps/fermi/bkg"
     #bkghome="/home/fermi/prove/bkg/"
-    fgl="%s/gll_psc_v16.fit" %(bkghome)
+    fgl = "%s/gll_psc_v16.fit" %(bkghome)
     dreq =  3.141592653589793/180.0
     dreq1 = 1./(3.1415922653589793/180.0)
     hdulist = pyfits.open(fgl)
     tbdata = hdulist[1].data
-    name1fgl=tbdata.field('Source_Name')
-    RA1fgl=tbdata.field('RAJ2000')
-    DEC1fgl=tbdata.field('DEJ2000')
-    LII1fgl=tbdata.field('GLON')
-    BII1fgl=tbdata.field('GLAT')
-    c68sma=tbdata.field('Conf_68_SemiMajor')
-    c68smi=tbdata.field('Conf_68_SemiMinor')
-    c68posa=tbdata.field('Conf_68_PosAng')
-    c95sma=tbdata.field('Conf_95_SemiMajor')
-    c95smi=tbdata.field('Conf_95_SemiMinor')
-    c95posa=tbdata.field('Conf_95_PosAng')
-    pivotene=tbdata.field('Pivot_Energy')
-    fluxden=tbdata.field('Flux_Density')
-    uncfluxden=tbdata.field('Unc_Flux_Density')
+    name1fgl = tbdata.field('Source_Name')
+    RA1fgl = tbdata.field('RAJ2000')
+    DEC1fgl = tbdata.field('DEJ2000')
+    LII1fgl = tbdata.field('GLON')
+    BII1fgl = tbdata.field('GLAT')
+    c68sma = tbdata.field('Conf_68_SemiMajor')
+    c68smi = tbdata.field('Conf_68_SemiMinor')
+    c68posa = tbdata.field('Conf_68_PosAng')
+    c95sma = tbdata.field('Conf_95_SemiMajor')
+    c95smi = tbdata.field('Conf_95_SemiMinor')
+    c95posa = tbdata.field('Conf_95_PosAng')
+    pivotene = tbdata.field('Pivot_Energy')
+    fluxden = tbdata.field('Flux_Density')
+    uncfluxden = tbdata.field('Unc_Flux_Density')
     spi=tbdata.field('Spectral_Index')
     uspi=tbdata.field('Unc_Spectral_Index')
     flux1000=tbdata.field('Flux1000')
