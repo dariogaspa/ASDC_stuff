@@ -11,6 +11,7 @@ import fileinput
 import pyfits
 from math import *
 from numpy import *
+import matplotlib.pyplot as plt
 
 
 def sedtool(sedfile):
@@ -139,7 +140,18 @@ def main(NAME, RA, DEC, TSTART, TSTOP, EMIN, EMAX, SC, ROIu, xml):
         like1.fit(verbosity=0, optObject=likeobj)
         print "0 is converged", likeobj.getRetCode()
         like1.logLike.writeXml(xmlfitname)
-
+        En = (like1.energies[:-1] + like1.energies[1:])/2.
+        plt.figure(figsize=(9,9))
+        plt.ylim((0.4,1e4))
+        plt.xlim((100,300000))
+        sum_model = np.zeros_like(like1._srcCnts(like1.sourceNames()[0]))
+        for sourceName in like1.sourceNames():
+             sum_model = sum_model + like1._srcCnts(sourceName)
+             plt.loglog(En,like._srcCnts(sourceName),label=sourceName[1:])
+        plt.loglog(En,sum_model,label='Total Model')
+        plt.errorbar(En,like1._Nobs(),yerr=np.sqrt(like1._Nobs()), fmt='o',label='Counts')
+        plt.legend(bbox_to_anchor=(1.05, 1), loc=2)
+        plt.savefig('%s_LIKE.png') %NAME
         numl = search(NAME, xmlfitname)
         numlg = str(numl + 3)
         os.system("sed '" + numlg + "," + numlg + " s/free=\"1\"/free=\"0\"/' " + xmlfitname + " > xml_sed.xml ")
@@ -157,6 +169,7 @@ def main(NAME, RA, DEC, TSTART, TSTOP, EMIN, EMAX, SC, ROIu, xml):
         cov_gg = like1.model[NAME].funcs['Spectrum'].getParam('Index').error()
         #    cov_II = like1.model[NAME].funcs['Spectrum'].getParam('Integral').error()
         flux_err = like1.fluxError(NAME, emin=100)
+        
         like1.plot()
         fitsedname = '%s_6bins_likeSEDout.fits' % NAME
         sedtool(fitsedname)
@@ -183,6 +196,18 @@ def main(NAME, RA, DEC, TSTART, TSTOP, EMIN, EMAX, SC, ROIu, xml):
         like1.fit(verbosity=0, optObject=likeobj)
         print "0 is converged", likeobj.getRetCode()
         like1.logLike.writeXml(xmlfitname)
+        En = (like1.energies[:-1] + like1.energies[1:])/2.
+        plt.figure(figsize=(9,9))
+        plt.ylim((0.4,1e4))
+        plt.xlim((100,300000))
+        sum_model = np.zeros_like(like1._srcCnts(like1.sourceNames()[0]))
+        for sourceName in like1.sourceNames():
+             sum_model = sum_model + like1._srcCnts(sourceName)
+             plt.loglog(En,like._srcCnts(sourceName),label=sourceName[1:])
+        plt.loglog(En,sum_model,label='Total Model')
+        plt.errorbar(En,like1._Nobs(),yerr=np.sqrt(like1._Nobs()), fmt='o',label='Counts')
+        plt.legend(bbox_to_anchor=(1.05, 1), loc=2)
+        plt.savefig('%s_LIKE.png') %NAME
         numl = search(NAME, xmlfitname)
         numlg = str(numl + 3)
         os.system("sed '" + numlg + "," + numlg + " s/free=\"1\"/free=\"0\"/' " + xmlfitname + " > xml_sed.xml ")
